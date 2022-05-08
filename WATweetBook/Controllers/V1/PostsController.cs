@@ -39,9 +39,6 @@ namespace WATweetBook.Controllers
         {
             var post = new Post { Name = postRequest.Name };
 
-            if (post.Id != Guid.Empty)
-                post.Id = Guid.NewGuid();
-
             await _postService.CreatePostAsync(post);
 
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";

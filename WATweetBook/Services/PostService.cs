@@ -43,6 +43,9 @@ namespace WATweetBook.Services
         public async Task<bool> DeletePostAsync(Guid postId)
         {
             var postToDelete = GetPostByIdAsync(postId).Result;
+            if (postToDelete == null)
+                return false;
+
             _dataContext.Posts.Remove(postToDelete);
             var deleted = await _dataContext.SaveChangesAsync();
 
