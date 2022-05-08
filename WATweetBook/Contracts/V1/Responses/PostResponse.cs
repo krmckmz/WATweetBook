@@ -1,7 +1,9 @@
-﻿namespace WATweetBook.Contracts.V1.Responses
+﻿using System;
+
+namespace WATweetBook.Contracts.V1.Responses
 {
     public class PostResponse
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
     }
 }
