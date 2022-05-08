@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WATweetBook.Domain;
 
 namespace WATweetBook.Data
 {
@@ -7,7 +8,8 @@ namespace WATweetBook.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-
         }
+        public DbSet<Post> Posts { get; set; }
+
     }
 }
