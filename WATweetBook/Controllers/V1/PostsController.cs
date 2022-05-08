@@ -13,7 +13,7 @@ namespace WATweetBook.Controllers
         private IPostService _postService;
         public PostsController(IPostService postService)
         {
-             _postService = postService;
+            _postService = postService;
         }
 
         [HttpGet(ApiRoutes.Posts.GetAll)]
@@ -27,7 +27,7 @@ namespace WATweetBook.Controllers
         {
             var post = _postService.GetPostById(postId);
 
-            if(post == null)
+            if (post == null)
                 return NotFound();
 
             return Ok(post);
@@ -50,6 +50,32 @@ namespace WATweetBook.Controllers
             var response = new PostResponse { Id = post.Id };
 
             return Created(locationUri, response);
+        }
+
+        [HttpPut(ApiRoutes.Posts.Update)]
+        public IActionResult Update([FromRoute] Guid postId, UpdatePostRequest postRequest)
+        {
+            var post = new Post
+            {
+                Id = postId,
+                Name = postRequest.Name,
+            };
+
+            var updated = _postService.UpdatePost(post);
+            if (updated)
+                return Ok(post);
+            
+            return NotFound();
+        }
+
+        [HttpDelete(ApiRoutes.Posts.Delete)]
+        public IActionResult Delete([FromRoute] Guid postId)
+        {
+            var deleted = _postService.DeletePost(postId);
+            if (deleted)
+                return NoContent();
+
+            return NotFound();
         }
     }
 }
