@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
 using WATweetBook.Options;
+using WATweetBook.Services;
 
 namespace WATweetBook.Installers
 {
@@ -16,6 +17,8 @@ namespace WATweetBook.Installers
             var jwtSettings = new JwtSettings();
             configuration.Bind(nameof(JwtSettings), jwtSettings);
             services.AddSingleton(jwtSettings);
+            services.AddScoped<IIdentityService, IdentityService>();
+
 
             services.AddMvc();
 
